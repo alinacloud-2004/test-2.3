@@ -3,457 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Калькулятор калорий — простой расчёт</title>
-  <style>
-    /* ----- Базовые сбросы и типографика ----- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: #f7f9fc;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      line-height: 1.5;
-      color: #1e293b;
-    }
-
-    /* ----- Карточка по центру ----- */
-    .card {
-      background: #ffffff;
-      max-width: 560px;
-      width: 100%;
-      border-radius: 32px;
-      box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 8px 12px -4px rgba(0, 0, 0, 0.05);
-      padding: 2.5rem 2rem;
-      transition: box-shadow 0.2s ease;
-    }
-
-    /* ----- Семантические блоки ----- */
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    h1 span {
-      font-size: 2.2rem;
-    }
-
-    .subhead {
-      color: #64748b;
-      font-size: 1rem;
-      margin-top: 0.4rem;
-      font-weight: 400;
-      border-bottom: 1px solid #e9eef3;
-      padding-bottom: 1rem;
-    }
-
-    /* ----- Форма ----- */
-    .calc-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    label {
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: #334155;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    label i {
-      font-style: normal;
-      font-size: 1.1rem;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      font-size: 1rem;
-      border: 1.5px solid #dbe1e8;
-      border-radius: 18px;
-      background: #ffffff;
-      outline: none;
-      transition: all 0.2s;
-      font-family: inherit;
-      color: #0f172a;
-    }
-
-    input:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-    }
-
-    input::placeholder {
-      color: #a0afbe;
-      font-weight: 300;
-    }
-
-    /* убираем стрелки у number-полей */
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    input[type="number"] {
-      -moz-appearance: textfield;
-      appearance: textfield;
-    }
-
-    /* ----- Кнопка ----- */
-    .btn-calc {
-      background: #1e293b;
-      color: white;
-      border: none;
-      border-radius: 60px;
-      padding: 1rem 1.8rem;
-      font-size: 1.1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      letter-spacing: 0.3px;
-      box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.15);
-      margin-top: 0.5rem;
-      font-family: inherit;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .btn-calc:hover {
-      background: #0f172a;
-    }
-
-    .btn-calc:active {
-      transform: scale(0.98);
-    }
-
-    /* ----- Блок результата и ошибок ----- */
-    .result-area {
-      background: #f1f6fe;
-      border-radius: 24px;
-      padding: 1.5rem 1.2rem;
-      text-align: center;
-      transition: background 0.2s, color 0.2s;
-      min-height: 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .result-area.error {
-      background: #fee9e7;
-      color: #b91c1c;
-    }
-
-    .result-placeholder {
-      color: #64748b;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      opacity: 0.8;
-    }
-
-    .error-message {
-      font-weight: 500;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #b91c1c;
-    }
-
-    .calorie-result {
-      font-size: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .calorie-number {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #0f172a;
-      line-height: 1.2;
-    }
-
-    .calorie-unit {
-      font-size: 1rem;
-      color: #475569;
-      font-weight: 400;
-      letter-spacing: 0.2px;
-    }
-
-    .calorie-detail {
-      font-size: 0.9rem;
-      color: #64748b;
-      margin-top: 0.25rem;
-      border-top: 1px dashed #cbd5e1;
-      padding-top: 0.6rem;
-      width: 100%;
-    }
-
-    /* ----- Футер (семантический) ----- */
-    footer {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #94a3b8;
-      text-align: center;
-      border-top: 1px solid #e2e8f0;
-      padding-top: 1.2rem;
-      width: 100%;
-    }
-
-    /* ----- Адаптивность ----- */
-    @media (max-width: 480px) {
-      body {
-        padding: 1rem;
-      }
-      .card {
-        padding: 1.8rem 1.2rem;
-        border-radius: 28px;
-      }
-      h1 {
-        font-size: 1.7rem;
-      }
-      h1 span {
-        font-size: 1.8rem;
-      }
-      .btn-calc {
-        padding: 0.9rem 1.4rem;
-        font-size: 1rem;
-      }
-      .calorie-number {
-        font-size: 2rem;
-      }
-    }
-  </style>
+  <title>Тарифы облачного сервиса | БЭМ Архитектура</title>
+  <!-- Подключение внешнего файла стилей -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
-    <!-- Шапка -->
-    <header>
-      <h1>
-        <span>🔥</span> Калькулятор калорий
-      </h1>
-      <p class="subhead">Рассчитайте суточную норму калорий</p>
-    </header>
+  <header class="header">
+    <h1 class="header__title">Выберите ваш план подписки</h1>
+    <p class="header__subtitle">Прозрачные тарифы без скрытых платежей · Практикум по технологии программирования</p>
+  </header>
 
-    <!-- Основной контент -->
-    <main>
-      <form class="calc-form" id="calorieForm" novalidate>
-        <!-- Вес -->
-        <div class="input-group">
-          <label for="weight">
-            <i>⚖️</i> Вес (кг)
-          </label>
-          <input type="number" id="weight" name="weight" placeholder="Например, 70" min="0" step="0.1">
-        </div>
+  <main class="pricing-grid">
+    <!-- Карточка 1: Старт -->
+    <article class="pricing-card">
+      <h2 class="pricing-card__title">Старт</h2>
+      <p class="pricing-card__desc">Для индивидуальных разработчиков и пет-проектов</p>
+      <div class="pricing-card__price">0 ₽ <span class="pricing-card__period">/ навсегда</span></div>
+      <ul class="pricing-card__features">
+        <li>1 публичный репозиторий</li>
+        <li>100 Мб хранилища</li>
+        <li>Базовая техподдержка</li>
+      </ul>
+      <button class="pricing-card__button">Выбрать бесплатно</button>
+    </article>
 
-        <!-- Рост -->
-        <div class="input-group">
-          <label for="height">
-            <i>📏</i> Рост (см)
-          </label>
-          <input type="number" id="height" name="height" placeholder="Например, 175" min="0" step="0.1">
-        </div>
+    <!-- Карточка 2: Хит продаж с БЭМ-модификатором _featured -->
+    <article class="pricing-card pricing-card_featured">
+      <div class="pricing-card__badge">ХИТ ВЫБОРА</div>
+      <h2 class="pricing-card__title">Профессионал</h2>
+      <p class="pricing-card__desc">Для коммерческих проектов и командной разработки</p>
+      <div class="pricing-card__price">990 ₽ <span class="pricing-card__period">/ месяц</span></div>
+      <ul class="pricing-card__features">
+        <li>Неограниченные репозитории</li>
+        <li>10 Гб в облаке + CI/CD</li>
+        <li>Приоритет 24/7</li>
+      </ul>
+      <button class="pricing-card__button pricing-card__button_primary">Подключить Pro</button>
+    </article>
 
-        <!-- Возраст -->
-        <div class="input-group">
-          <label for="age">
-            <i>🎂</i> Возраст (лет)
-          </label>
-          <input type="number" id="age" name="age" placeholder="Например, 30" min="0" step="1">
-        </div>
-
-        <button type="submit" class="btn-calc">
-          <span>📊</span> Рассчитать
-        </button>
-      </form>
-
-      <!-- Блок вывода результата / ошибки -->
-      <div class="result-area" id="resultArea">
-        <div class="result-placeholder">
-          <span>🧮</span> Введите параметры и нажмите «Рассчитать»
-        </div>
-      </div>
-    </main>
-
-    <!-- Подвал -->
-    <footer>
-      <p>Формула Миффлина — Сан Жеора · для образовательных целей</p>
-    </footer>
-  </div>
-
-  <script>
-    (function() {
-      const form = document.getElementById('calorieForm');
-      const weightInput = document.getElementById('weight');
-      const heightInput = document.getElementById('height');
-      const ageInput = document.getElementById('age');
-      const resultArea = document.getElementById('resultArea');
-
-      // Функция для очистки и вывода ошибки
-      function showError(message) {
-        resultArea.classList.add('error');
-        resultArea.innerHTML = `<div class="error-message"><span>⚠️</span> ${message}</div>`;
-      }
-
-      // Функция для сброса ошибки (на случай если нужно вернуть плейсхолдер)
-      function resetResultArea() {
-        resultArea.classList.remove('error');
-        // Ничего не выводим, оставим пустым до следующего вызова — но у нас всегда будет либо ошибка, либо результат
-      }
-
-      // Функция для проверки ввода и вычисления
-      function calculateCalories(event) {
-        event.preventDefault(); // отключаем перезагрузку страницы
-
-        // Сброс предыдущих состояний
-        resultArea.classList.remove('error');
-
-        // Получаем значения из полей (строки)
-        const weightRaw = weightInput.value.trim();
-        const heightRaw = heightInput.value.trim();
-        const ageRaw = ageInput.value.trim();
-
-        // Проверка на пустоту (все три поля обязательны)
-        if (weightRaw === '' || heightRaw === '' || ageRaw === '') {
-          showError('Заполните все поля: вес, рост и возраст.');
-          return;
-        }
-
-        // Преобразуем в числа
-        const weight = parseFloat(weightRaw);
-        const height = parseFloat(heightRaw);
-        const age = parseFloat(ageRaw);
-
-        // Проверка на NaN (на случай, если ввели не число, хотя type=number частично защищает)
-        if (isNaN(weight) || isNaN(height) || isNaN(age)) {
-          showError('Пожалуйста, введите числовые значения.');
-          return;
-        }
-
-        // Проверка на отрицательные значения или ноль (для веса, роста, возраста логично >0)
-        if (weight <= 0) {
-          showError('Вес должен быть положительным числом больше нуля.');
-          return;
-        }
-        if (height <= 0) {
-          showError('Рост должен быть положительным числом больше нуля.');
-          return;
-        }
-        if (age <= 0) {
-          showError('Возраст должен быть положительным числом больше нуля.');
-          return;
-        }
-
-        // Дополнительные разумные границы (необязательно, но для предотвращения абсурдных значений)
-        if (weight > 400) {
-          showError('Вес не должен превышать 400 кг.');
-          return;
-        }
-        if (height > 280) {
-          showError('Рост не должен превышать 280 см.');
-          return;
-        }
-        if (age > 120) {
-          showError('Возраст не должен превышать 120 лет.');
-          return;
-        }
-
-        // Расчёт базового метаболизма (BMR) по формуле Миффлина-Сан Жеора (для женщин и мужчин усреднённо? 
-        // Но чтобы не усложнять, сделаем универсальную формулу: для мужчин и женщин разная, но у нас нет пола,
-        // поэтому возьмём среднее или используем формулу для женщин? Лучше сделаем нейтральную: 
-        // BMR = 10 * вес(кг) + 6.25 * рост(см) - 5 * возраст(лет) + 5 (для мужчин) или -161 (для женщин).
-        // Возьмём усреднённое значение между мужским и женским: (5 + (-161))/2 = -78. 
-        // Но чтобы не было путаницы, используем мужскую формулу + 5, но пометим, что это приблизительно.
-        // Или используем формулу Харриса-Бенедикта? Остановимся на Миффлине с коэффициентом 5 (мужская),
-        // но для универсальности возьмём усреднённый вариант: (10*w + 6.25*h - 5*a + 5) и (10*w + 6.25*h - 5*a - 161)
-        // Среднее: 10*w + 6.25*h - 5*a - 78. Это будет нейтрально.
-        // Но для простоты и предсказуемости используем "среднее" значение: 10*w + 6.25*h - 5*a - 78.
-        // Это даст адекватные цифры для большинства людей.
-
-        const bmr = 10 * weight + 6.25 * height - 5 * age - 78;
-
-        // Округляем до целого
-        const calories = Math.round(bmr);
-
-        // Проверка, что калории получились положительными (защита от очень маленьких значений)
-        if (calories < 0) {
-          showError('Проверьте введённые данные: расчёт дал отрицательное значение. Убедитесь, что параметры реалистичны.');
-          return;
-        }
-
-        // Выводим результат
-        resultArea.innerHTML = `
-          <div class="calorie-result">
-            <div class="calorie-number">${calories}</div>
-            <div class="calorie-unit">ккал / день</div>
-            <div class="calorie-detail">Базовый метаболизм (BMR)</div>
-          </div>
-        `;
-        resultArea.classList.remove('error'); // на всякий случай
-      }
-
-      // Навешиваем обработчик на отправку формы
-      form.addEventListener('submit', calculateCalories);
-
-      // Дополнительная защита: при вводе отрицательного числа через type=number браузер не даст отправить,
-      // но мы всё равно обрабатываем вручную, плюс сбрасываем ошибку при фокусе? Не требуется.
-      // Также очищаем ошибку при изменении полей? Не будем навязчиво — только по кнопке.
-      // Но можно добавить сброс ошибки при вводе, чтобы не мешала.
-      [weightInput, heightInput, ageInput].forEach(input => {
-        input.addEventListener('input', function() {
-          // Если была ошибка, убираем её и возвращаем плейсхолдер? Нет, оставим как есть, 
-          // чтобы пользователь видел ошибку до следующего расчёта. Но лучше не трогать.
-          // Однако, если пользователь начал исправлять, можно убрать класс error и вернуть плейсхолдер.
-          // Сделаем мягко: только убираем красный фон, но текст ошибки оставляем? Нет, лучше не менять.
-          // Чтобы UX был лучше, при вводе сбрасываем ошибку до нейтрального состояния.
-          if (resultArea.classList.contains('error')) {
-            resultArea.classList.remove('error');
-            resultArea.innerHTML = `<div class="result-placeholder"><span>🧮</span> Введите параметры и нажмите «Рассчитать»</div>`;
-          }
-        });
-      });
-
-      // Также сброс ошибки при фокусе? Не обязательно.
-      // Инициализация: если поле пустое, не показываем ошибку.
-    })();
-  </script>
+    <!-- Карточка 3: Корпоративная -->
+    <article class="pricing-card">
+      <h2 class="pricing-card__title">Корпорация</h2>
+      <p class="pricing-card__desc">Выделенный сервер и корпоративная безопасность</p>
+      <div class="pricing-card__price">4 900 ₽ <span class="pricing-card__period">/ месяц</span></div>
+      <ul class="pricing-card__features">
+        <li>Собственный домен и SSL</li>
+        <li>SLA 99.99% доступности</li>
+        <li>Персональный инженер</li>
+      </ul>
+      <button class="pricing-card__button">Связаться с нами</button>
+    </article>
+  </main>
 </body>
 </html>
