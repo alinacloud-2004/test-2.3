@@ -3,30 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Карточка товара | Книжный магазин</title>
+  <title>ВкусДоставка — пицца и роллы за 30 минут</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="product-container">
-    <article class="product-card">
-      <div class="product-card__badge">-25%</div>
-      <div class="product-card__image-box">
-        <span class="product-card__emoji">🧚</span>
-      </div>
+<body class="page">
 
-      <div class="product-card__content">
-        <div class="product-card__category">Книга</div>
-        <h2 class="product-card__title">A book set in a fantasy world</h2>
-        <div class="product-card__rating">★★★★★ <span class="product-card__reviews">(56237 отзыва)</span></div>
-        
-        <div class="product-card__pricing">
-          <span class="product-card__price-new">990 ₽</span>
-          <span class="product-card__price-old">3 990 ₽</span>
+  <!-- ШАПКА -->
+  <header class="header">
+    <div class="header__container">
+      <a href="#" class="logo">
+        <span class="logo__icon">🍕</span>
+        <span class="logo__text">Вкус<span class="logo__text_accent">Доставка</span></span>
+      </a>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#" class="nav__link nav__link_active">Меню</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Акции</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Доставка</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <a href="tel:+78001234567" class="header__phone">8 800 123-45-67</a>
+    </div>
+  </header>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="main">
+
+    <!-- ГЕРОЙ-СЕКЦИЯ -->
+    <section class="hero">
+      <div class="hero__container">
+        <div class="hero__content">
+          <p class="hero__badge">🔥 Горячая доставка за 30 минут</p>
+          <h1 class="hero__title">Пицца и роллы<br><span class="hero__title_accent">с пылу с жару</span></h1>
+          <p class="hero__subtitle">Готовим из свежих продуктов и привозим горячими. Бесплатная доставка от 900 ₽ по городу.</p>
+          <div class="hero__actions">
+            <a href="#" class="btn btn_primary">Заказать сейчас</a>
+            <a href="#" class="btn btn_ghost">Смотреть меню</a>
+          </div>
+          <ul class="hero__features">
+            <li class="hero__feature">✔️ Свежие ингредиенты</li>
+            <li class="hero__feature">✔️ Оплата онлайн</li>
+            <li class="hero__feature">✔️ Доставка 24/7</li>
+          </ul>
         </div>
 
-        <button class="product-card__btn" onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+        <div class="hero__media">
+          <div class="hero__circle">
+            <span class="hero__emoji" role="img" aria-label="Пицца">🍕</span>
+          </div>
+        </div>
       </div>
-    </article>
-  </div>
+    </section>
+
+    <!-- КАТЕГОРИИ -->
+    <section class="categories">
+      <div class="categories__container">
+        <h2 class="section-title">Что закажем сегодня?</h2>
+        <div class="categories__grid">
+          <article class="category-card">
+            <span class="category-card__icon">🍕</span>
+            <h3 class="category-card__title">Пицца</h3>
+            <p class="category-card__text">Классика и авторские рецепты на тонком тесте</p>
+          </article>
+          <article class="category-card">
+            <span class="category-card__icon">🍣</span>
+            <h3 class="category-card__title">Роллы</h3>
+            <p class="category-card__text">Свежая рыба и хрустящие овощи</p>
+          </article>
+          <article class="category-card">
+            <span class="category-card__icon">🥤</span>
+            <h3 class="category-card__title">Напитки</h3>
+            <p class="category-card__text">Лимонады, соки и морсы к вашему столу</p>
+          </article>
+          <article class="category-card">
+            <span class="category-card__icon">🍰</span>
+            <h3 class="category-card__title">Десерты</h3>
+            <p class="category-card__text">Сладкое завершение ужина</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="benefits">
+      <div class="benefits__container">
+        <h2 class="section-title section-title_light">Почему нас выбирают</h2>
+        <div class="benefits__grid">
+          <div class="benefit">
+            <span class="benefit__icon">⏱️</span>
+            <h3 class="benefit__title">Доставка за 30 минут</h3>
+            <p class="benefit__text">Если опоздаем — пицца за наш счёт.</p>
+          </div>
+          <div class="benefit">
+            <span class="benefit__icon">🔥</span>
+            <h3 class="benefit__title">Готовим после заказа</h3>
+            <p class="benefit__text">Никаких заготовок — только свежая еда.</p>
+          </div>
+          <div class="benefit">
+            <span class="benefit__icon">💳</span>
+            <h3 class="benefit__title">Удобная оплата</h3>
+            <p class="benefit__text">Картой онлайн или наличными курьеру.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta__container">
+        <h2 class="cta__title">Голодны? Мы уже готовим!</h2>
+        <p class="cta__text">Сделайте заказ за 2 минуты — и горячая пицца приедет к вашей двери.</p>
+        <a href="#" class="btn btn_primary btn_large">Оформить заказ</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ПОДВАЛ -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__brand">
+        <span class="logo__icon">🍕</span>
+        <span class="logo__text">Вкус<span class="logo__text_accent">Доставка</span></span>
+      </div>
+      <p class="footer__copy">© 2025 ВкусДоставка. Все права защищены.</p>
+      <nav class="footer__nav">
+        <a href="tel:+78001234567" class="footer__link">8 800 123-45-67</a>
+        <a href="#" class="footer__link">Политика конфиденциальности</a>
+      </nav>
+    </div>
+  </footer>
+
 </body>
 </html>
