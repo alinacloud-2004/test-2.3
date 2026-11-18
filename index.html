@@ -3,56 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Тарифы облачного сервиса | БЭМ Архитектура</title>
-  <!-- Подключение внешнего файла стилей -->
+  <title>Карточка товара | Книжный магазин</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <h1 class="header__title">Выберите ваш план подписки</h1>
-    <p class="header__subtitle">Прозрачные тарифы без скрытых платежей · Практикум по технологии программирования</p>
-  </header>
+  <div class="product-container">
+    <article class="product-card">
+      <div class="product-card__badge">-25%</div>
+      <div class="product-card__image-box">
+        <span class="product-card__emoji">🧚</span>
+      </div>
 
-  <main class="pricing-grid">
-    <!-- Карточка 1: Старт -->
-    <article class="pricing-card">
-      <h2 class="pricing-card__title">Старт</h2>
-      <p class="pricing-card__desc">Для индивидуальных разработчиков и пет-проектов</p>
-      <div class="pricing-card__price">0 ₽ <span class="pricing-card__period">/ навсегда</span></div>
-      <ul class="pricing-card__features">
-        <li>1 публичный репозиторий</li>
-        <li>100 Мб хранилища</li>
-        <li>Базовая техподдержка</li>
-      </ul>
-      <button class="pricing-card__button">Выбрать бесплатно</button>
-    </article>
+      <div class="product-card__content">
+        <div class="product-card__category">Книга</div>
+        <h2 class="product-card__title">A book set in a fantasy world</h2>
+        <div class="product-card__rating">★★★★★ <span class="product-card__reviews">(56237 отзыва)</span></div>
+        
+        <div class="product-card__pricing">
+          <span class="product-card__price-new">990 ₽</span>
+          <span class="product-card__price-old">3 990 ₽</span>
+        </div>
 
-    <!-- Карточка 2: Хит продаж с БЭМ-модификатором _featured -->
-    <article class="pricing-card pricing-card_featured">
-      <div class="pricing-card__badge">ХИТ ВЫБОРА</div>
-      <h2 class="pricing-card__title">Профессионал</h2>
-      <p class="pricing-card__desc">Для коммерческих проектов и командной разработки</p>
-      <div class="pricing-card__price">990 ₽ <span class="pricing-card__period">/ месяц</span></div>
-      <ul class="pricing-card__features">
-        <li>Неограниченные репозитории</li>
-        <li>10 Гб в облаке + CI/CD</li>
-        <li>Приоритет 24/7</li>
-      </ul>
-      <button class="pricing-card__button pricing-card__button_primary">Подключить Pro</button>
+        <button class="product-card__btn" onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+      </div>
     </article>
-
-    <!-- Карточка 3: Корпоративная -->
-    <article class="pricing-card">
-      <h2 class="pricing-card__title">Корпорация</h2>
-      <p class="pricing-card__desc">Выделенный сервер и корпоративная безопасность</p>
-      <div class="pricing-card__price">4 900 ₽ <span class="pricing-card__period">/ месяц</span></div>
-      <ul class="pricing-card__features">
-        <li>Собственный домен и SSL</li>
-        <li>SLA 99.99% доступности</li>
-        <li>Персональный инженер</li>
-      </ul>
-      <button class="pricing-card__button">Связаться с нами</button>
-    </article>
-  </main>
+  </div>
 </body>
 </html>
